@@ -1,0 +1,8 @@
+SELECT Festival_Name, Festival_Start_Date, Festival_End_Date, Address, PostCode,
+	Organiser_Name, Email, Performer_Name, Performance_Date, Ticket_Desc, Ticket_Price
+FROM Festival, Organiser, Performer, Performer_Festival, Ticket
+WHERE Festival_Name= ? AND Festival_Start_Date= ? AND 
+	Festival.Festival_ID= Performer_Festival.Festival_ID AND 
+	Performer.Performer_ID= Performer_Festival.Band_ID AND
+	Festival.Organiser_ID= Organiser.Organiser_ID AND
+	Festival.Festival_ID= Ticket.Festival_ID

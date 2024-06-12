@@ -1,0 +1,82 @@
+CREATE TABLE Admin(
+	AdminID INT(6) PRIMARY KEY,
+	Username VARCHAR(20),
+	Password VARCHAR(20)
+	);
+
+CREATE TABLE Customer(
+	CustomerID INT(6) PRIMARY KEY,
+	CustomerType VARCHAR(20),
+	FirstName VARCHAR(20),
+	LastName VARCHAR(20),
+	OrganisationName VARCHAR(30),
+	Address VARCHAR(40),
+	Town VARCHAR(30),
+	PostCode VARCHAR(10),
+	Email VARCHAR(30),
+	PhoneNumber VARCHAR(15),
+	Username VARCHAR(20),
+	Password VARCHAR(20),
+	PaymentMethod VARCHAR(20),
+	AccountNo VARCHAR(20)
+	);
+
+CREATE TABLE Organiser(
+	OrganiserID INT(6) PRIMARY KEY,
+	OrganiserName VARCHAR(20),
+	ContactNumber VARCHAR(15),
+	Email VARCHAR(30),
+	Username VARCHAR(20),
+	Password VARCHAR(20)
+	);
+
+CREATE TABLE Performer(
+	PerformerID INT(6) PRIMARY KEY,
+	AgentFirstName VARCHAR(20),
+	AgentLastName VARCHAR(20),
+	ContactNumber VARCHAR(15),
+	PerformerName VARCHAR(30)
+	);
+
+CREATE TABLE Festival(
+	FestivalID INT(6) PRIMARY KEY,
+	OrganiserID INT(6),
+	FetsivalName VARCHAR(30),
+	FestivalStartDate DATE,
+	FestivalEndDate DATE,
+	Address VARCHAR(40),
+	PostCode VARCHAR(10),
+	FOREIGN KEY (OrganiserID) REFERENCES Organiser(OrganiserID),
+	ON DELETE CASCADE
+	);
+
+CREATE TABLE Festival_Performer(
+	FestivalID int(6),
+	PerformerID INT(6),
+	PerformanceDate DATE,
+	PRIMARY KEY (FestivalID,PerformerID)
+	);
+
+CREATE TABLE Ticket(
+	TicketCode VARCHAR(6) PRIMARY KEY,
+	FestivalID INT(6),
+	TicketDesc VARCHAR(30),
+	TicketPrice FLOAT(6,2),
+	FOREIGN KEY (FestivalID)
+	REFERENCES Festival(FestivalID)
+	ON DELETE CASCADE
+	);
+
+CREATE TABLE Booking(
+	BookingID INT(6) PRIMARY KEY,
+	CustomerID INT(6),
+	FestivalID INT(6),
+	TicketCode VARCHAR(6),
+	Quantity INT(255),
+	FOREIGN KEY (CustomerID)
+	REFERENCES Customer(CustomerID) ON DELETE CASCADE,
+	FOREIGN KEY (FestivalID)
+	REFERENCES Festival(FestivalID) ON DELETE CASCADE,
+	FOREIGN KEY (TicketCode)
+	REFERENCES Ticket(TicketCode) ON DELETE CASCADE
+	);

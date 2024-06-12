@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="JavaBuild">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/JavaBuild_jar/JavaBuild.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
